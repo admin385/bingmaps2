@@ -1,0 +1,158 @@
+<!doctype HTML>
+<html>
+<!-- OmniMaps 30Aug24 Programming: Jordan T. Hastings -->
+
+<head>
+<title>OmniMaps</title>
+
+	<meta charset="utf-8" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+<style> body { margin:0; padding:0; } </style>
+
+<style>
+ .controls {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 300;
+  height: 29px;
+  margin-left: 10px;
+  margin-top: 1px;
+  outline: none;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+ }
+ .callout-annotation {
+    background-color: #CCC;
+ } 
+ .circle-annotation { background-image: url('plus-sign2t.png');
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    color: #FFF;
+    background-color: #CCC;
+    text-align: center;
+    line-height: 32px;
+ }
+</style> 
+
+<style>
+.circle-annotation1 {
+    width: 8px;
+    height:8px;
+    border-radius: 50%;
+    color: #bbb;
+    background-color: #ff0;
+    text-align: left; font-family: sans-serif; font-size: 8pt;
+    line-height: 32px;
+	transform: rotate(0deg); transform-origin: 0% 0%;
+
+}
+.callout1 { color: #F00; }
+
+</style>
+
+  <!--script src="https://cdn.apple-mapkit.com/mk/5.x.x/mapkit.core.js"
+    crossorigin async
+    data-callback="initMapKit"
+    data-libraries="services,full-map,geojson"
+    data-token=
+"eyJraWQiOiJHNTVWRFlONzQ1IiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJOSlBVNk1VNVMyIiwiaWF0IjoxNzI1NzE0Njc5LCJvcmlnaW4iOiJhcHBsZW1hcHMyLmNvbSIsImV4cCI6MTczNjIzNjgwMH0.JtgTfEhH9ARuOhn8xRJExOOIrPJEOzGNnrAr4wHkatAVJ0fl-5I-P8j1r-a7_eJ92AXStpefxnsooP04GEkdFw"></script -->
+<!--
+"eyJraWQiOiI4WDVSTkZaNENMIiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJOSlBVNk1VNVMyIiwiaWF0IjoxNzIwMzg1MDExLCJvcmlnaW4iOiJhcHBsZW1hcHMyLmNvbSIsImV4cCI6MTcyNTY5MjQwMH0.8KIpmZpADDVKhlXl9Ag9LSF9hipP5Qka-r8vSuRRUgbqqnSIiio7kKsZSV-VgQj5MJkJcfYtFGch7IuvJHfbkQ"></script  // applemaps2 expired 07Sep24>
+<!--	"eyJraWQiOiI4WDVSTkZaNENMIiwidHlwIjoiSldUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJOSlBVNk1VNVMyIiwiaWF0IjoxNzIwMzg1MDExLCJvcmlnaW4iOiJhcHBsZW1hcHMyLmNvbSIsImV4cCI6MTcyNTY5MjQwMH0.8KIpmZpADDVKhlXl9Ag9LSF9hipP5Qka-r8vSuRRUgbqqnSIiio7kKsZSV-VgQj5MJkJcfYtFGch7IuvJHfbkQ"></script applemaps2 -->
+  <script src="http://www.bing.com/api/maps/mapcontrol?key=ArToy79PBqszDARXyic8MIZtSAb-raj-mCjz31uJWhuFIOSAzNmjrhvv5owRnTvo" ></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmrLN2z0y1M2Dg8hvhfBckywh_kDXQC_k&libraries=places"> </script> 
+<!-- script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmrLN2z0y1M2Dg8hvhfBckywh_kDXQC_k&libraries=places&loading=async&callback=initMap"> </script -->
+
+<!-- script src="http://htpm.co/1MViewer/maplabel1.js"> </script //ERR ln121 no ;  -->
+<!-- script src="http://addressplus.co/maplabel1.js"> </script //FIX ln121 added ;-->
+<!-- script src='https://htpm.com/maplabel1.js'--> <script src='maplabel1.js'> </script>
+</head>
+
+<body>
+ <div style="height:32px; margin-top:6px;">
+ <big>
+ <span Id=sOmni> 
+ &nbsp;<b>OmniMaps</b>&nbsp;
+<select Id=multi disabled>
+ <option>select</option>
+ <option>Apple</option>
+ <option>Bing</option>
+ <option>Esri</option>
+ <option>Google</option>
+ </select>
+</span>
+ <img src='MSBingLogo.png'>
+ &nbsp;<!-- span onClick="hidePlace()">Address:</span> <input id=addr size=28 -->
+ &nbsp;<button onClick="hidePlace()">Address:</button> <input id=addr size=28 -->
+ <input hidden id=locale class=controls placeholder="Lookup a placename">
+ <!--see: https://dev.virtualearth.net/REST/v1/Locations?query={4590%20MacArthur%20Blvd%20Newport%20Beach%20CA&maxResults=5&key=ArToy79PBqszDARXyic8MIZtSAb-raj-mCjz31uJWhuFIOSAzNmjrhvv5owRnTvo -->
+ <select hidden id=addrlist onChange="reInitPlace()">
+  <option value="0,0">Select ...</option>
+  <option value="-1,-1">Enter Address or Placename</option>
+  <option value="33.66862,-117.86363">4590 MacArthur Blvd, Newport Beach, CA</option>
+  <option value="33.66718,-117.86257">4500 MacArthur Blvd, Renaissance NB Hotel, CA</option>
+  <option value="33.59827,-117.86596">714 Narcissus Ave, Newport Beach, CA</option>
+  <option value="39.20423,-106.95279">431 Edgewood Ln, Snowmass Village, CO</option>
+  <!--option value="39.51917,-119.85950">4820 Sky Mountain Cir, Reno, NV</option -->
+  <option value="33.679354,-117.8615">John Wayne Airport, Santa Ana, CA</option>
+  <!-- option value="33.641865,-117.839546">University of California, Irvine, CA</option -->
+  <option value="33.64577,-117.84272">University of California, Irvine, CA</option>
+  <option value="0,0">Set Anchor to Most Recent Marker</option>
+</select>
+ &nbsp; | <span onClick="clearCode()">Code:</span> <input Id=code size=8 placeholder="XY@xxyy" onChange="showMarker(this)" onInput="clearCode1(this)">
+ &nbsp; <button Id=more onClick="showMore()">More</button>
+ &nbsp; <button onClick="clearMarkers()">Clear</button>
+</big>
+ </div>
+ <hr size=3 style="margin-left:0; text-align:left; width:720px;">
+ <div style="position:relative; height:644px;">
+  <!-- div id=map style="position:absolute; width:720px; height:100%; z-Index:0"><//div 04Nov Del -->
+  <div id=map style="position:absolute; width:100%; height:100%; z-Index:0"></div>
+  <!--div id=Gmap style="position:absolute; width:640px; height:100%; z-Index:-1"></div -->
+  <div id=marks style="position:absolute; top:40px; left:15px; width:200px; height:300px; z-index:1">
+   <p style="color:yellow;"><center><big>Marker Index</big></center>
+   <table id=tbl border=1><tr><th><button onClick='zoomTo(0)'><b>Marks</b></button><th>Distance<th>Heading<td>&#10050;</table>
+  </div>
+</div>
+ <hr size=2 style="margin-left:0; text-align:left; width:720px;">
+ <div Id=sTrack style="height:40px; width:720px;">
+ <span style="float:left;">
+ &nbsp;UTM: <input Id=tile size=10 disabled> <input Id=1Mloc size=8 disabled>
+ </span>
+ <span style="float:right;">
+ Lon_Lat: <input Id=LL size=20 disabled>
+ </div>
+ </div>
+
+<style>
+table {
+  background-color:#b0b0b0;  opacity: 0.5;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 2px;
+  text-align: right; 
+}
+</style>
+<!-- script src="http://htpm.co/1MViewer/UTMProj.js"> </script -->
+<!-- script src="http://addressplus.co/UTMProj.js"> </script -->
+<!-- script src='https://htpm.co/UTMProj.js' --> <script src='UTMProj.js'></script>
+
+
+<script src='~~omnimapB.js'> </script>
+
+
+</body>
+</html>
