@@ -375,7 +375,7 @@ rects[0] = null;  // add 25Jul
 markerLatitude = POSN.lat; markerLongitude = POSN.lng;  //Add 06Oct, to match AppleMaps2 30Jul
 	  document.querySelector('title').textContent = "Bingmaps2";
     //window.history.replaceState({additionalInformation: 'Updated the URL with JS'}, "Bingmaps2", "http://bingmaps2.com");
-	  map = new Microsoft.Maps.Map('#map', {center:new Microsoft.Maps.Location(POSN.lat-0.00050, POSN.lng), zoom:(placeName&&isNaN(parseInt(placeName))?16:18)});  //mod 30Jun: zoom-in on numbered street addrs
+	  map = new Microsoft.Maps.Map('#map', {center:new Microsoft.Maps.Location(POSN.lat-0.000, POSN.lng), zoom:(placeName&&isNaN(parseInt(placeName))?16:18)});  //mod 30Jun: zoom-in on numbered street addrs
   map.setView({mapTypeId: Microsoft.Maps.MapTypeId.aerial, zoom:18}); // 12Sep mod: per SLee
 //map.setView({mapTypeId: Microsoft.Maps.MapTypeId.roadmap, zoom:19}); // 29Apr25 *TESTING
 	  Mxxyy = "@"+uPosn.Eing.toString().slice(-3,-1)+uPosn.Ning.toString().slice(-3,-1)  // add 09Sep
@@ -746,6 +746,7 @@ function calloutForLandmark1Annotation(annotation) {
 </body>
 
 </html>
+
 
 
 
