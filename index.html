@@ -629,7 +629,7 @@ var fm=false; if (rmarkers.indexOf(rMxxyy)<0) { rmarkers += rMxxyy; fm = true;} 
 	 markers.push(marker); map.entities.push(marker); //console.log("push "+markers.length);console.log(markers[markers.length-1].geometry) 
  //qX = u.Eing.toString().slice(-4,-3); qY = u.Ning.toString().slice(-4,-3);  //ADD 02May25 KLUDGE
  addMarkerRow(Mxxyy, u);  //MOD 02May25, ADD 22Apr25
- map.setView({center:marker.getLocation(), zoom:18}); // 02May25 *TESTING
+//map.setView({center:marker.getLocation(), zoom:18}); // 26Feb26 Suppressed 02May25 *TESTING
   if (fm) { rect = rectb(u, uPosn.Zone); rects.push(rect); map.entities.push(rect);} //27Sep always, once per cell show 10x10m box
 //handler = new  Microsoft.Maps.Events.addHandler(marker, 'rightclick', handleRtClick);  //*NB: not avail~
 //but see: https://learn.microsoft.com/en-us/bingmaps/v8-web-control/map-control-concepts/event-examples/right-click-events-for-shapes
@@ -746,6 +746,7 @@ function calloutForLandmark1Annotation(annotation) {
 </body>
 
 </html>
+
 
 
 
